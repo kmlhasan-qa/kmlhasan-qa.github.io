@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a single reading column styled like a test-run report — summary first, then suites (roles, projects), each with status chips. */
+/* Layout: a single reading column styled like a test-run report: summary first, then suites (roles, projects), each with status chips.
+   Featured and side-project cards span the full grid width so the newest work breaks the card rhythm on purpose. */
 :root{
   --bg:#F2F4F7; --surface:#FFFFFF; --ink:#141B2D; --muted:#5A6378; --line:#DCE1EA;
   --accent:#2F4BD6; --accent-soft:#E6EAFB; --pass:#16794C; --pass-soft:#E2F3EA; --run:#9A5B00; --run-soft:#FBEFD9;
@@ -103,7 +104,25 @@ h3{font:700 20px/1.25 var(--display);margin:0;letter-spacing:-.01em}
 .proj ul{margin:0;padding-left:18px;font-size:14.5px;display:grid;gap:4px}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
 .tags span{font:400 12px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:2px 7px}
-.proj .meta{font:400 12.5px var(--mono);color:var(--muted)}
+.proj .meta{font:400 12.5px var(--mono);color:var(--muted);overflow-wrap:anywhere}
+.proj .meta:hover{color:var(--accent)}
+.proj code{font:400 13px var(--mono)}
+.btn,.filters button,.copy{cursor:pointer}
+.btn:active,.filters button:active,.copy:active{transform:translateY(1px)}
+.filters button:hover,.copy:hover{border-color:var(--accent);color:var(--ink)}
+/* full-width cards: featured suite (text + run report) and side projects (video + text) */
+.proj.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px 28px;align-items:start}
+.proj.wide > .body{display:flex;flex-direction:column;gap:10px;min-width:0}
+.proj.wide .run{margin-top:0}
+.run-body.list{grid-template-columns:1fr}
+.run-body .fail{color:var(--run);font-weight:500}
+.proj.show.portrait{grid-template-columns:minmax(0,260px) minmax(0,1fr)}
+.proj video{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);background:#000}
+.proj.show.landscape video{aspect-ratio:16/9}
+.proj.show.portrait video{aspect-ratio:9/16;max-height:520px;object-fit:contain}
+.vid-note{font:400 12px var(--mono);color:var(--muted);margin-top:6px}
+.links{display:flex;flex-wrap:wrap;gap:6px 18px}
+@media (max-width:760px){.proj.wide,.proj.show.portrait{grid-template-columns:1fr}.proj.show.portrait video{max-width:300px;margin-inline:auto}}
 .dana-ctx{grid-column:1/-1;margin:8px 0 0;max-width:75ch;color:var(--muted);font-size:15px;padding-top:18px;border-top:1px dashed var(--line)}
 
 /* skills */
@@ -168,7 +187,7 @@ footer{padding-block:32px 48px;color:var(--muted);font:400 13px var(--mono);bord
 </div></header>
 
 <section id="about"><div class="wrap">
-  <div class="sec-head"><h2>How I work</h2><p>Four habits behind every release I sign off</p></div>
+  <div class="sec-head"><h2>How I work</h2><p>Five habits behind every release I sign off</p></div>
   <div class="principles">
     <div class="pr">
       <span class="pr-k">risk-based</span>
@@ -189,6 +208,11 @@ footer{padding-block:32px 48px;color:var(--muted);font:400 13px var(--mono);bord
       <span class="pr-k">people</span>
       <h3>Raise the whole team</h3>
       <p>I've mentored 10 QA/SDET engineers and work closely with product, engineering and compliance, so quality is a shared goal and not a final checkpoint.</p>
+    </div>
+    <div class="pr">
+      <span class="pr-k">ai-assisted</span>
+      <h3>Use AI, verify everything</h3>
+      <p>I write my own Claude skills for test research, framework setup and run reports. Every scenario, test and defect they produce gets checked against the real product before it counts.</p>
     </div>
   </div>
   <h3 class="caps-title">Capabilities</h3>
@@ -282,14 +306,45 @@ footer{padding-block:32px 48px;color:var(--muted);font:400 13px var(--mono);bord
 </div></section>
 
 <section id="projects"><div class="wrap">
-  <div class="sec-head"><h2>Projects</h2><p>Payments work at DANA and automation suites at ICTechnology</p></div>
+  <div class="sec-head"><h2>Projects</h2><p>Automation suites on GitHub, apps I built, and payments work at DANA</p></div>
   <div class="filters" role="group" aria-label="Filter projects">
     <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
     <button type="button" id="f-ict" data-f="ict" aria-pressed="false">ICTechnology &amp; GitHub</button>
+    <button type="button" id="f-side" data-f="side" aria-pressed="false">Apps I built</button>
     <button type="button" id="f-dana" data-f="dana" aria-pressed="false">DANA</button>
   </div>
 
   <div class="grid" id="grid">
+    <!-- Featured: newest GitHub work -->
+    <article class="proj wide" data-g="ict">
+      <div class="body">
+        <div class="top"><span>GitHub · Latest work</span><span class="chip code">Repo</span></div>
+        <h3>Toolshop checkout: UI, API &amp; load tests</h3>
+        <p>A full test suite for the checkout of the Practice Software Testing Toolshop demo: browse, cart, sign in, billing address, payment, invoice.</p>
+        <ul>
+          <li>Playwright + TypeScript UI and API projects, Page Object Model, a fresh registered customer per test</li>
+          <li>The end-to-end test reads the invoice back through the API, so it proves the order was saved, not just that a thank-you message appeared</li>
+          <li>Known defects are executable: each one is a test marked <code>test.fail()</code> that goes red in CI once the bug is fixed</li>
+          <li>k6 load model with arrival-rate phases (normal, ramp, peak, recovery), run against a local Docker copy so the shared demo never gets load</li>
+          <li>Built with my own Claude skills for test research, framework setup and run reports, with every finding verified by hand</li>
+        </ul>
+        <div class="tags"><span>Playwright</span><span>TypeScript</span><span>Postman / newman</span><span>k6</span><span>Docker</span><span>GitHub Actions</span></div>
+        <a class="meta" href="https://github.com/kmlhasan-qa/playwright-k6-practicesoftwaretesting" target="_blank" rel="noopener">github.com/kmlhasan-qa/playwright-k6-practicesoftwaretesting →</a>
+      </div>
+      <div class="run" aria-label="Results of the last local run, 8 Nov 2026">
+        <div class="run-head"><span>last local run</span><span>8 Nov 2026</span></div>
+        <div class="run-body list">
+          <div><span class="ok">✓</span> API: 52 tests, 37 passed, 15 open defects failing as expected</div>
+          <div><span class="ok">✓</span> UI: 3 tests, 2 passed, 1 open defect failing as expected</div>
+          <div><span class="ok">✓</span> newman: 56 of 56 assertions passed</div>
+          <div><span class="ok">✓</span> k6 load: 12,151 orders, 0% errors</div>
+          <div><span class="fail">!</span> Worst bug: full card number and CVV returned in plain text by GET /invoices/{id}</div>
+          <div><span class="fail">!</span> Expired card accepted, same cart checked out twice, customers can mark their own order SHIPPED</div>
+        </div>
+        <div class="run-foot">19 defects reported, sorted by severity</div>
+      </div>
+    </article>
+
     <!-- ICTechnology / GitHub -->
     <article class="proj" data-g="ict">
       <div class="top"><span>ICTechnology · HRIS</span><span class="chip code">Repo</span></div>
@@ -339,9 +394,13 @@ footer{padding-block:32px 48px;color:var(--muted);font:400 13px var(--mono);bord
         <li>Recipient flows: browsing nearby food, requesting items and confirming collection</li>
         <li>Backend API validation behind listings, requests and pickups</li>
         <li>Functional, regression and release validation for each app release</li>
+        <li>Android flows automated in Maestro, run on Maestro Cloud from GitHub Actions with results posted to Teams</li>
       </ul>
-      <div class="tags"><span>Mobile app</span><span>Backend APIs</span><span>Regression</span><span>Release sign-off</span></div>
-      <a class="meta" href="https://loopdhands.com.au/" target="_blank" rel="noopener">loopdhands.com.au →</a>
+      <div class="tags"><span>Mobile app</span><span>Maestro</span><span>Backend APIs</span><span>Release sign-off</span></div>
+      <div class="links">
+        <a class="meta" href="https://loopdhands.com.au/" target="_blank" rel="noopener">loopdhands.com.au →</a>
+        <a class="meta" href="https://github.com/kmlhasan-qa/maestro" target="_blank" rel="noopener">github.com/kmlhasan-qa/maestro →</a>
+      </div>
     </article>
 
     <article class="proj" data-g="ict">
@@ -369,6 +428,59 @@ footer{padding-block:32px 48px;color:var(--muted);font:400 13px var(--mono);bord
       </ul>
       <div class="tags"><span>Playwright</span><span>TypeScript</span><span>E2E</span></div>
       <a class="meta" href="https://github.com/kmlhasan-qa/frontline-data-solutions" target="_blank" rel="noopener">github.com/kmlhasan-qa/frontline-data-solutions →</a>
+    </article>
+
+    <!-- Apps I built -->
+    <article class="proj wide show landscape" data-g="side">
+      <div>
+        <video controls preload="none" playsinline width="1280" height="720" poster="media/rekap-rt.jpg" aria-label="Rekap Keuangan RT product walkthrough, 30 seconds">
+          <source src="media/rekap-rt.mp4" type="video/mp4">
+          <a href="media/rekap-rt.mp4">Download the Rekap Keuangan RT video</a>
+        </video>
+        <div class="vid-note">30 s walkthrough · on-screen text in Indonesian</div>
+      </div>
+      <div class="body">
+        <div class="top"><span>Side project · Neighbourhood finance</span><span class="chip done">Live</span></div>
+        <h3>Rekap Keuangan RT</h3>
+        <p>A web app for my neighbourhood association to record monthly resident fees and spending, so every household can see where the money goes.</p>
+        <ul>
+          <li>Treasurer side: fees per house across several months, expenses by category, transfers between bank and cash wallets, staff payroll with advances and loan instalments</li>
+          <li>Resident side is read-only, enforced in the database with Supabase Row Level Security, not only hidden in the UI</li>
+          <li>Every add, edit and delete is written to an audit log by a database trigger</li>
+          <li>Excel and PDF import and export, plus a demo mode that runs without a backend</li>
+        </ul>
+        <div class="tags"><span>JavaScript</span><span>Supabase</span><span>PostgreSQL</span><span>GitHub Pages</span></div>
+        <div class="links">
+          <a class="meta" href="https://kmlhasan-qa.github.io/rekap-rt/" target="_blank" rel="noopener">kmlhasan-qa.github.io/rekap-rt →</a>
+          <a class="meta" href="https://github.com/kmlhasan-qa/rekap-rt" target="_blank" rel="noopener">github.com/kmlhasan-qa/rekap-rt →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="proj wide show portrait" data-g="side">
+      <div>
+        <video controls preload="none" playsinline width="720" height="1280" poster="media/camilanika.jpg" aria-label="How to order at CamilaNika, 21 second walkthrough">
+          <source src="media/camilanika.mp4" type="video/mp4">
+          <a href="media/camilanika.mp4">Download the CamilaNika video</a>
+        </video>
+        <div class="vid-note">21 s walkthrough · Indonesian</div>
+      </div>
+      <div class="body">
+        <div class="top"><span>Side project · Online shop</span><span class="chip done">Live</span></div>
+        <h3>CamilaNika shop</h3>
+        <p>The online store for a home-made coffee and cireng business: customers pick a menu, check the cart and pay online, and the owner runs orders and cash flow from an admin page.</p>
+        <ul>
+          <li>Online payments through iPaymu (QRIS, e-wallet, virtual account), with a webhook that marks orders paid</li>
+          <li>Admin cash-flow view for online orders, offline sales and expenses</li>
+          <li>Three test suites: unit tests for the cash-flow logic, SQL tests that build a fresh database from every migration, and Playwright UI tests against a local PostgreSQL</li>
+          <li>Tests never point at the live database</li>
+        </ul>
+        <div class="tags"><span>JavaScript</span><span>Supabase</span><span>PostgreSQL</span><span>Playwright</span><span>Payments</span></div>
+        <div class="links">
+          <a class="meta" href="https://camilanika.store/" target="_blank" rel="noopener">camilanika.store →</a>
+          <a class="meta" href="https://github.com/kmlhasan-qa/camilanika.github.io" target="_blank" rel="noopener">github.com/kmlhasan-qa/camilanika.github.io →</a>
+        </div>
+      </div>
     </article>
 
     <!-- DANA -->
@@ -443,9 +555,10 @@ footer{padding-block:32px 48px;color:var(--muted);font:400 13px var(--mono);bord
   <div class="sec-head"><h2>Technical skills</h2></div>
   <div class="skills">
     <div><h3>Languages</h3><div class="tags"><span>Python</span><span>JavaScript</span><span>TypeScript</span><span>PL/SQL</span></div></div>
-    <div><h3>Automation</h3><div class="tags"><span>Playwright</span><span>Appium</span><span>Testsigma</span><span>Cucumber</span></div></div>
-    <div><h3>Testing tools</h3><div class="tags"><span>Postman</span><span>k6</span><span>TestRail</span><span>JIRA</span><span>Confluence</span><span>Notion</span></div></div>
-    <div><h3>Platforms</h3><div class="tags"><span>Web</span><span>Android</span><span>iOS</span><span>REST APIs</span></div></div>
+    <div><h3>Automation</h3><div class="tags"><span>Playwright</span><span>Appium</span><span>Maestro</span><span>Testsigma</span><span>Cucumber</span></div></div>
+    <div><h3>Testing tools</h3><div class="tags"><span>Postman</span><span>newman</span><span>k6</span><span>TestRail</span><span>JIRA</span><span>Confluence</span><span>Notion</span></div></div>
+    <div><h3>Platforms &amp; data</h3><div class="tags"><span>Web</span><span>Android</span><span>iOS</span><span>REST APIs</span><span>PostgreSQL</span><span>Supabase</span></div></div>
+    <div><h3>CI &amp; AI</h3><div class="tags"><span>GitHub Actions</span><span>Docker</span><span>Maestro Cloud</span><span>Claude Code</span><span>Custom Claude skills</span></div></div>
     <div><h3>Practices</h3><div class="tags"><span>CI/CD pipelines</span><span>Scrum</span><span>Kanban</span><span>Defect management</span><span>Test strategy</span></div></div>
   </div>
 </div></section>
