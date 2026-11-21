@@ -140,6 +140,9 @@ details.more .run{margin-top:14px}
 .list p a{white-space:nowrap}
 @media (max-width:640px){.list li{grid-template-columns:1fr}}
 .note{margin-top:20px;font-size:15px;color:var(--muted)}
+.more-link{margin-top:20px;font:500 15px var(--body)}
+.more-link a{display:inline-flex;align-items:center;min-height:44px}
+.more-link a::after{content:" →";} /* points to the detail page */
 
 /* experience */
 .jobs{list-style:none;margin:0;padding:0;display:grid;gap:18px}
@@ -185,6 +188,7 @@ details.more .run{margin-top:14px}
       <ul class="menu" id="menu">
         <li><a href="#work">Work</a></li>
         <li><a href="#experience">Experience</a></li>
+        <li><a href="work.html">Full details</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -208,7 +212,7 @@ details.more .run{margin-top:14px}
     <a class="btn primary" href="#work">See my work</a>
     <a class="btn" href="mailto:kmlhasan1989@gmail.com">Email me</a>
   </div>
-  <div class="elsewhere"><a href="https://github.com/kmlhasan-qa" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/kamal-hasan-96312850" target="_blank" rel="noopener">LinkedIn</a></div>
+  <div class="elsewhere"><a href="work.html">Full portfolio</a><a href="https://github.com/kmlhasan-qa" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/kamal-hasan-96312850" target="_blank" rel="noopener">LinkedIn</a></div>
 
   <div class="run" role="group" aria-label="Career summary">
     <div class="run-head"><span>career.spec.ts</span><span>kamal-hasan</span></div>
@@ -291,6 +295,7 @@ details.more .run{margin-top:14px}
       </div>
     </article>
   </div>
+  <p class="more-link"><a href="work.html#work">See every project in detail</a></p>
 </div></section>
 
 <section id="clients"><div class="wrap">
@@ -304,6 +309,7 @@ details.more .run{margin-top:14px}
     <li><div class="name">Still Aware<small>API</small></div><p>API-first automation for a charity platform, run in CI. <a href="https://github.com/kmlhasan-qa/still-aware" target="_blank" rel="noopener">Repo</a></p></li>
     <li><div class="name">Performance<small>k6</small></div><p>Load tests for AusRelief, Still Aware and the HRIS. <a href="https://github.com/kmlhasan-qa/k6-performance" target="_blank" rel="noopener">Repo</a></p></li>
   </ul>
+  <p class="more-link"><a href="work.html#clients">More on each product</a></p>
 </div></section>
 
 <section id="dana"><div class="wrap">
@@ -317,6 +323,7 @@ details.more .run{margin-top:14px}
     <li><div class="name">DANA Kasir<small>2024 to 2025</small></div><p>Point-of-sale app and in-store card payments.</p></li>
     <li><div class="name">Bills &amp; top-ups<small>2020 to 2021</small></div><p>Government tax payments and ISO 8583 prepaid top-ups in the consumer app.</p></li>
   </ul>
+  <p class="more-link"><a href="work.html#dana">What I tested at DANA, in detail</a></p>
 </div></section>
 
 <section id="experience"><div class="wrap">
@@ -324,11 +331,11 @@ details.more .run{margin-top:14px}
   <h2>Where I've worked</h2>
   <ul class="jobs reveal">
     <li><div><b>QA Specialist</b> <span>· ICTechnology, remote</span></div><time>Feb 2026 to now</time></li>
-    <li><div><b>Lead SDET Engineer</b> <span>· DANA Indonesia</span></div><time>2022 to 2025</time></li>
-    <li><div><b>Senior SDET, then SDET</b> <span>· DANA Indonesia</span></div><time>2018 to 2021</time></li>
+    <li><div><b>SDET to Lead SDET Engineer</b> <span>· DANA Indonesia</span></div><time>2018 to 2025</time></li>
     <li><div><b>Senior IT Operations Engineer</b> <span>· Adira Finance</span></div><time>2013 to 2018</time></li>
     <li><div><b>Oracle Functional Consultant</b> <span>· Puninar Logistic</span></div><time>2013</time></li>
   </ul>
+  <p class="more-link"><a href="work.html#experience">Full experience with responsibilities</a></p>
 
   <h3 style="margin:56px 0 18px">Toolbox</h3>
   <dl class="tools reveal">
