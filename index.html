@@ -170,14 +170,19 @@ details.more .run{margin-top:14px}
 .cf-head > p{margin:0;font-size:16px;max-width:52ch;justify-self:end;color:color-mix(in srgb,var(--bg) 78%,var(--ink))}
 .cf-mail{display:inline-flex;align-items:center;min-height:44px;font:700 clamp(18px,2vw,22px)/1.2 var(--display);color:var(--bg);overflow-wrap:anywhere;margin-bottom:16px;text-decoration-thickness:1px}
 .cf-mail:hover{color:color-mix(in srgb,var(--accent) 60%,var(--bg))}
-.cf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
-@media (min-width:1000px){.cf-grid{grid-template-columns:1.45fr 1fr 1fr 1fr}} /* email card gets the room it needs so the address never breaks mid-word */
-.cf-card{border:1px solid color-mix(in srgb,var(--bg) 22%,var(--ink));border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0}
+.cf-grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:640px){.cf-grid{grid-template-columns:1fr 1fr}} /* 2 x 2: every value fits on one line, cards line up */
+.cf-card{border:1px solid color-mix(in srgb,var(--bg) 22%,var(--ink));border-radius:14px;padding:12px 12px 12px 16px;display:grid;grid-template-columns:minmax(0,1fr) 44px;align-items:center;gap:4px 12px;min-height:76px;min-width:0}
 .cf-card small{display:block;font:500 12px var(--mono);color:color-mix(in srgb,var(--bg) 72%,var(--ink))}
-.cf-card .v{font-weight:500;overflow-wrap:anywhere;color:var(--bg)}
-.cf-copy{font:500 13px var(--body);min-height:44px;padding:8px 14px;border-radius:8px;border:1px solid color-mix(in srgb,var(--bg) 35%,var(--ink));background:transparent;color:var(--bg);flex:none;cursor:pointer}
+.cf-card .v{font-weight:500;color:var(--bg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.cf-copy{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid color-mix(in srgb,var(--bg) 30%,var(--ink));background:transparent;color:var(--bg);cursor:pointer}
 .cf-copy:hover{border-color:var(--bg)}
 .cf-copy:active{transform:translateY(1px)}
+.cf-copy svg{width:18px;height:18px}
+.cf-copy .ok{display:none}
+.cf-copy.done .ok{display:block}.cf-copy.done .cp{display:none}
+@media (max-width:360px){.cf-card .v{font-size:14px}} /* smallest phones: the email still fits on one line */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .cf :focus-visible{outline-color:var(--bg)}
 .cf-footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 72%,var(--ink));font:400 13px var(--mono)}
 .cf-line{border-top:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink));padding-block:18px 28px}
@@ -370,11 +375,12 @@ details.more .run{margin-top:14px}
     <p>Open to QA lead, QA manager and senior SDET roles, remote or in Jakarta. Email is the fastest way to reach me.</p>
   </div>
   <div class="cf-grid">
-    <div class="cf-card"><div><small>Email</small><a class="v" id="cf-email" href="mailto:kmlhasan1989@gmail.com">kmlhasan1989@gmail.com</a></div><button class="cf-copy" type="button" data-t="cf-email">Copy</button></div>
-    <div class="cf-card"><div><small>Phone</small><span class="v" id="cf-phone">+62 811 1112 207</span></div><button class="cf-copy" type="button" data-t="cf-phone">Copy</button></div>
+    <div class="cf-card"><div><small>Email</small><a class="v" href="mailto:kmlhasan1989@gmail.com">kmlhasan1989@gmail.com</a></div><button class="cf-copy" type="button" data-copy="kmlhasan1989@gmail.com" aria-label="Copy email address"><svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg></button></div>
+    <div class="cf-card"><div><small>Phone</small><a class="v" href="tel:+628111112207">+62 811 1112 207</a></div><button class="cf-copy" type="button" data-copy="+62 811 1112 207" aria-label="Copy phone number"><svg class="cp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7"/></svg></button></div>
     <div class="cf-card"><div><small>LinkedIn</small><a class="v" href="https://www.linkedin.com/in/kamal-hasan-96312850" target="_blank" rel="noopener">kamal-hasan-96312850</a></div></div>
     <div class="cf-card"><div><small>GitHub</small><a class="v" href="https://github.com/kmlhasan-qa" target="_blank" rel="noopener">kmlhasan-qa</a></div></div>
   </div>
+  <p class="sr" id="cf-status" aria-live="polite"></p>
 </div></section>
 </main>
 
@@ -387,11 +393,11 @@ details.more .run{margin-top:14px}
 <script>
 /* shared: copy buttons and floating back-to-top */
 (function(){
+  // one copy handler: copies data-copy, shows a tick for a moment, and announces it to screen readers
   document.querySelectorAll('.cf-copy').forEach(function(b){b.addEventListener('click',function(){
-    var el=document.getElementById(b.dataset.t), txt=el.textContent;
-    function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)}
-    function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
-    try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
+    var st=document.getElementById('cf-status');
+    function done(msg){b.classList.add('done');st.textContent=msg;setTimeout(function(){b.classList.remove('done');st.textContent=''},1500)}
+    try{navigator.clipboard.writeText(b.dataset.copy).then(function(){done('Copied')},function(){done('Copy failed: '+b.dataset.copy)})}catch(e){done('Copy failed: '+b.dataset.copy)}
   })});
   var t=document.getElementById('to-top');
   function upd(){t.classList.toggle('is-visible',scrollY>innerHeight*0.8)}
