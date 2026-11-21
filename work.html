@@ -199,23 +199,34 @@ details.more[open] summary::before{content:"−"}
 .cert b{display:block;font:600 16px/1.35 var(--body);margin-bottom:4px}
 .cert span{font:400 13px var(--mono);color:var(--muted)}
 
-/* contact */
-.contact{background:var(--ink);color:var(--bg);border-top:0}
-.contact h2{font-size:clamp(36px,6vw,68px)}
-.contact .sec-head p{color:color-mix(in srgb,var(--bg) 78%,var(--ink))}
-.big-mail{display:inline-block;font:700 clamp(22px,4.2vw,44px)/1.15 var(--display);color:var(--bg);overflow-wrap:anywhere;margin-bottom:28px;text-decoration-thickness:2px}
-.big-mail:hover{color:color-mix(in srgb,var(--accent) 60%,var(--bg))}
-.ct-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
-.ct{border:1px solid color-mix(in srgb,var(--bg) 22%,var(--ink));border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0}
-.ct small{display:block;font:500 12px var(--mono);color:color-mix(in srgb,var(--bg) 72%,var(--ink))}
-.ct .v{font-weight:500;overflow-wrap:anywhere;color:var(--bg)}
-.copy{font:500 13px var(--body);min-height:44px;padding:8px 14px;border-radius:8px;border:1px solid color-mix(in srgb,var(--bg) 35%,var(--ink));background:transparent;color:var(--bg);flex:none}
-.copy:hover{border-color:var(--bg)}
-.copy:active{transform:translateY(1px)}
-.contact :focus-visible{outline-color:var(--bg)}
-footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 72%,var(--ink));font:400 13px var(--mono);padding-block:0 40px}
-footer .wrap{border-top:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink));padding-top:24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
+/* contact + footer: identical on both pages (the "full details" version) */
+.cf{background:var(--ink);color:var(--bg);padding-block:80px 64px;border-top:0;font-size:16px;line-height:1.6}
+.cf-wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.cf-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 48px;align-items:end;margin-bottom:40px}
+.cf-kicker{font:500 13px var(--mono);margin:0 0 8px;color:color-mix(in srgb,var(--bg) 78%,var(--ink))}
+.cf h2{font:800 clamp(36px,6vw,68px)/1.02 var(--display);letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--bg)}
+.cf-head p{margin:0;font-size:16.5px;max-width:52ch;color:color-mix(in srgb,var(--bg) 78%,var(--ink))}
+.cf-mail{display:inline-block;font:700 clamp(22px,4.2vw,44px)/1.15 var(--display);color:var(--bg);overflow-wrap:anywhere;margin-bottom:28px;text-decoration-thickness:2px}
+.cf-mail:hover{color:color-mix(in srgb,var(--accent) 60%,var(--bg))}
+.cf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+@media (min-width:1000px){.cf-grid{grid-template-columns:1.45fr 1fr 1fr 1fr}} /* email card gets the room it needs so the address never breaks mid-word */
+.cf-card{border:1px solid color-mix(in srgb,var(--bg) 22%,var(--ink));border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0}
+.cf-card small{display:block;font:500 12px var(--mono);color:color-mix(in srgb,var(--bg) 72%,var(--ink))}
+.cf-card .v{font-weight:500;overflow-wrap:anywhere;color:var(--bg)}
+.cf-copy{font:500 13px var(--body);min-height:44px;padding:8px 14px;border-radius:8px;border:1px solid color-mix(in srgb,var(--bg) 35%,var(--ink));background:transparent;color:var(--bg);flex:none;cursor:pointer}
+.cf-copy:hover{border-color:var(--bg)}
+.cf-copy:active{transform:translateY(1px)}
+.cf :focus-visible{outline-color:var(--bg)}
+.cf-footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 72%,var(--ink));font:400 13px var(--mono)}
+.cf-line{border-top:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink));padding-block:24px 40px}
+@media (max-width:760px){.cf-head{grid-template-columns:1fr}.cf{padding-block:60px 48px}}
+/* floating back-to-top: appears after the first screen, so it never competes with the hero */
+.to-top{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:30;width:48px;height:48px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 10px 24px -12px color-mix(in srgb,var(--ink) 45%,transparent);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(8px)}
+.to-top.is-visible{opacity:1;visibility:visible;transform:none}
+.to-top:hover{border-color:var(--accent);color:var(--accent)}
+.to-top:active{transform:translateY(1px)}
+.to-top svg{width:20px;height:20px}
+@media (prefers-reduced-motion:no-preference){.to-top{transition:opacity .2s,transform .2s,visibility .2s}}
 
 /* reveal on scroll: content is visible without JS; only paced when motion is welcome */
 @media (prefers-reduced-motion:no-preference){
@@ -269,7 +280,7 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
 <!-- SELECTED WORK -->
 <section id="work"><div class="wrap">
   <div class="sec-head reveal">
-    <div><p class="kicker">01 · Selected work</p><h2>Recent work, with the results</h2></div>
+    <div><p class="kicker">Selected work</p><h2>Recent work, with the results</h2></div>
     <p>A checkout suite I built from scratch, and two apps I made and tested end to end. Everything here is public on GitHub.</p>
   </div>
 
@@ -357,7 +368,7 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
 <!-- CLIENT WORK -->
 <section id="clients"><div class="wrap">
   <div class="sec-head reveal">
-    <div><p class="kicker">02 · ICTechnology</p><h2>Client products I test today</h2></div>
+    <div><p class="kicker">ICTechnology</p><h2>Client products I test today</h2></div>
     <p>I own QA for these products end to end, frontend and backend, from test design to release sign-off.</p>
   </div>
   <div class="grid">
@@ -422,7 +433,7 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
 <!-- DANA -->
 <section id="dana"><div class="wrap">
   <div class="sec-head reveal">
-    <div><p class="kicker">03 · DANA Indonesia, 2018 to 2025</p><h2>Seven years of payments quality</h2></div>
+    <div><p class="kicker">DANA Indonesia, 2018 to 2025</p><h2>Seven years of payments quality</h2></div>
     <p>I grew from SDET to Lead SDET and led quality for DANA's merchant products, and earlier its consumer lifestyle features.</p>
   </div>
   <div class="dana-intro reveal">
@@ -461,7 +472,7 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
 <!-- HOW I WORK -->
 <section id="approach"><div class="wrap">
   <div class="sec-head reveal">
-    <div><p class="kicker">04 · Approach</p><h2>How I work</h2></div>
+    <div><p class="kicker">Approach</p><h2>How I work</h2></div>
     <p>Five habits behind every release I sign off.</p>
   </div>
   <ol class="habits reveal">
@@ -476,7 +487,7 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
 <!-- EXPERIENCE -->
 <section id="experience"><div class="wrap">
   <div class="sec-head reveal">
-    <div><p class="kicker">05 · Experience</p><h2>Roles and responsibilities</h2></div>
+    <div><p class="kicker">Experience</p><h2>Roles and responsibilities</h2></div>
     <p>Every role since 2010, with what I was responsible for.</p>
   </div>
   <div class="tl">
@@ -562,7 +573,7 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
 <!-- SKILLS -->
 <section id="skills"><div class="wrap">
   <div class="sec-head reveal">
-    <div><p class="kicker">06 · Toolbox</p><h2>Skills and certifications</h2></div>
+    <div><p class="kicker">Toolbox</p><h2>Skills and certifications</h2></div>
     <p>Tools I use in real projects, most of them visible in the repos above.</p>
   </div>
   <div class="skills reveal">
@@ -581,23 +592,47 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
   </div>
 </div></section>
 
-<!-- CONTACT -->
-<section id="contact" class="contact"><div class="wrap">
-  <div class="sec-head">
-    <div><p class="kicker" style="color:inherit;opacity:.8">07 · Contact</p><h2>Need someone to own quality?</h2></div>
+<section id="contact" class="cf"><div class="cf-wrap">
+  <div class="cf-head">
+    <div><p class="cf-kicker">Contact</p><h2>Need someone to own quality?</h2></div>
     <p>Open to QA lead, QA manager and senior SDET roles, remote or in Jakarta. Email is the fastest way to reach me.</p>
   </div>
-  <a class="big-mail" href="mailto:kmlhasan1989@gmail.com">kmlhasan1989@gmail.com</a>
-  <div class="ct-grid">
-    <div class="ct"><div><small>Email</small><span class="v" id="email">kmlhasan1989@gmail.com</span></div><button class="copy" type="button" data-t="email">Copy</button></div>
-    <div class="ct"><div><small>Phone</small><span class="v" id="phone">+62 811 1112 207</span></div><button class="copy" type="button" data-t="phone">Copy</button></div>
-    <div class="ct"><div><small>LinkedIn</small><a class="v" href="https://www.linkedin.com/in/kamal-hasan-96312850" target="_blank" rel="noopener">kamal-hasan-96312850</a></div></div>
-    <div class="ct"><div><small>GitHub</small><a class="v" href="https://github.com/kmlhasan-qa" target="_blank" rel="noopener">kmlhasan-qa</a></div></div>
+  <a class="cf-mail" href="mailto:kmlhasan1989@gmail.com">kmlhasan1989@gmail.com</a>
+  <div class="cf-grid">
+    <div class="cf-card"><div><small>Email</small><span class="v" id="cf-email">kmlhasan1989@gmail.com</span></div><button class="cf-copy" type="button" data-t="cf-email">Copy</button></div>
+    <div class="cf-card"><div><small>Phone</small><span class="v" id="cf-phone">+62 811 1112 207</span></div><button class="cf-copy" type="button" data-t="cf-phone">Copy</button></div>
+    <div class="cf-card"><div><small>LinkedIn</small><a class="v" href="https://www.linkedin.com/in/kamal-hasan-96312850" target="_blank" rel="noopener">kamal-hasan-96312850</a></div></div>
+    <div class="cf-card"><div><small>GitHub</small><a class="v" href="https://github.com/kmlhasan-qa" target="_blank" rel="noopener">kmlhasan-qa</a></div></div>
   </div>
 </div></section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Kamal Hasan</span><a href="#top">Back to top</a></div></footer>
+<footer class="cf-footer"><div class="cf-wrap"><div class="cf-line">© 2026 Kamal Hasan</div></div></footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* shared: copy buttons and floating back-to-top */
+(function(){
+  document.querySelectorAll('.cf-copy').forEach(function(b){b.addEventListener('click',function(){
+    var el=document.getElementById(b.dataset.t), txt=el.textContent;
+    function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
+    try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
+  })});
+  var t=document.getElementById('to-top');
+  function upd(){t.classList.toggle('is-visible',scrollY>innerHeight*0.8)}
+  addEventListener('scroll',upd,{passive:true}); upd();
+  t.addEventListener('click',function(){
+    var smooth=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scrollTo({top:0,behavior:smooth?'smooth':'auto'});
+    document.querySelector('.mark').focus({preventScroll:true});
+  });
+})();
+</script>
+
 
 <script>
 (function(){
@@ -614,13 +649,6 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
   btn.addEventListener('click',function(){setMenu(!menu.classList.contains('open'))});
   menu.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);btn.focus()}});
-  // copy buttons
-  document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
-    var el=document.getElementById(b.dataset.t), txt=el.textContent;
-    function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)}
-    function fallback(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
-    try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(e){fallback()}
-  })});
   // reveal on scroll
   var els=document.querySelectorAll('.reveal');
   if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(e){e.classList.add('in')});return}
