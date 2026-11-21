@@ -47,14 +47,15 @@ p{margin:0}
 .muted{color:var(--muted)}
 .stack{font:400 13.5px/1.6 var(--mono);color:var(--muted)} /* inline tool list */
 
-/* nav */
+/* nav: identical on both pages */
 .top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:8px;min-height:60px}
+.top .bar{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:8px;min-height:60px}
 .mark{display:inline-flex;align-items:center;min-height:44px;font:800 18px/1 var(--display);color:var(--ink);text-decoration:none;letter-spacing:-.02em;margin-right:auto}
 .mark span{color:var(--accent)}
 .menu{display:flex;gap:2px;list-style:none;margin:0;padding:0}
 .menu a{display:block;padding:10px 12px;border-radius:8px;color:var(--muted);text-decoration:none;font:500 14.5px var(--body)}
 .menu a:hover{color:var(--ink);background:color-mix(in srgb,var(--line) 50%,transparent)}
+.menu a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent);border-radius:8px 8px 0 0} /* shows which page you are on */
 .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .icon-btn:hover{border-color:var(--accent)}
 .icon-btn:active{transform:translateY(1px)}
@@ -69,6 +70,7 @@ p{margin:0}
   .menu{position:absolute;left:0;right:0;top:100%;flex-direction:column;padding:8px 20px 16px;background:var(--bg);border-bottom:1px solid var(--line);display:none}
   .menu.open{display:flex}
   .menu a{padding:12px;font-size:16px}
+  .menu a[aria-current="page"]{box-shadow:inset 3px 0 0 var(--accent);border-radius:0 8px 8px 0}
 }
 
 /* hero */
@@ -182,12 +184,11 @@ details.more .run{margin-top:14px}
 <body>
 
 <header class="top">
-  <div class="wrap">
-    <a class="mark" href="#top">Kamal Hasan<span>.</span></a>
+  <div class="bar">
+    <a class="mark" href="index.html">Kamal Hasan<span>.</span></a>
     <nav aria-label="Main">
       <ul class="menu" id="menu">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#experience">Experience</a></li>
+        <li><a aria-current="page" href="index.html">Overview</a></li>
         <li><a href="work.html">Full details</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>

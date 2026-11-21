@@ -21,7 +21,7 @@ document.documentElement.classList.add('js');
    - Rhythm: each section has its own composition (split hero, case studies, video showcases, card grid, dated list, numbered habits, timeline, closing contact).
    - Motion: short reveal on scroll to pace a long page; off under prefers-reduced-motion. */
 :root{
-  --bg:#F3F4F1; --surface:#FFFFFF; --ink:#12172A; --muted:#545D70; --line:#DADDE3; --soft:#E9EBE6;
+  --bg:#F4F4F0; --surface:#FFFFFF; --ink:#12172A; --muted:#545D70; --line:#DCDED8; --soft:#E9EBE6;
   --accent:#2F45D0; --accent-soft:#E5E9FC; --pass:#14744A; --pass-soft:#DFF1E7; --run:#8E5300; --run-soft:#FAEDD6;
   --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
@@ -29,10 +29,10 @@ document.documentElement.classList.add('js');
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0D111C; --surface:#151A28; --ink:#E9ECF4; --muted:#A0A8BB; --line:#272F45; --soft:#1A2032;
+  --bg:#0D111C; --surface:#151A28; --ink:#E9ECF4; --muted:#A3AABC; --line:#262E42; --soft:#1A2032;
   --accent:#93A5FF; --accent-soft:#1E2752; --pass:#62D69C; --pass-soft:#12301F; --run:#F2B862; --run-soft:#3A2A10; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0D111C; --surface:#151A28; --ink:#E9ECF4; --muted:#A0A8BB; --line:#272F45; --soft:#1A2032;
+  --bg:#0D111C; --surface:#151A28; --ink:#E9ECF4; --muted:#A3AABC; --line:#262E42; --soft:#1A2032;
   --accent:#93A5FF; --accent-soft:#1E2752; --pass:#62D69C; --pass-soft:#12301F; --run:#F2B862; --run-soft:#3A2A10; color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -46,14 +46,15 @@ a,button,summary{cursor:pointer}
 code{font:400 .9em var(--mono)}
 .mono{font-family:var(--mono)}
 
-/* nav */
+/* nav: identical on both pages */
 .top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:16px;min-height:60px}
+.top .bar{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:8px;min-height:60px}
 .mark{display:inline-flex;align-items:center;min-height:44px;font:800 18px/1 var(--display);color:var(--ink);text-decoration:none;letter-spacing:-.02em;margin-right:auto}
 .mark span{color:var(--accent)}
-.menu{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.menu{display:flex;gap:2px;list-style:none;margin:0;padding:0}
 .menu a{display:block;padding:10px 12px;border-radius:8px;color:var(--muted);text-decoration:none;font:500 14.5px var(--body)}
-.menu a:hover{color:var(--ink);background:var(--soft)}
+.menu a:hover{color:var(--ink);background:color-mix(in srgb,var(--line) 50%,transparent)}
+.menu a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent);border-radius:8px 8px 0 0} /* shows which page you are on */
 .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .icon-btn:hover{border-color:var(--accent)}
 .icon-btn:active{transform:translateY(1px)}
@@ -63,11 +64,12 @@ code{font:400 .9em var(--mono)}
 .theme-light{display:none}.theme-dark{display:block}
 :root[data-theme="dark"] .theme-dark{display:none} :root[data-theme="dark"] .theme-light{display:block}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .theme-dark{display:none} :root:not([data-theme="light"]) .theme-light{display:block}}
-@media (max-width:760px){
+@media (max-width:700px){
   #menu-btn{display:inline-flex}
-  .menu{position:absolute;left:0;right:0;top:100%;flex-direction:column;padding:8px 16px 16px;background:var(--bg);border-bottom:1px solid var(--line);display:none}
+  .menu{position:absolute;left:0;right:0;top:100%;flex-direction:column;padding:8px 20px 16px;background:var(--bg);border-bottom:1px solid var(--line);display:none}
   .menu.open{display:flex}
   .menu a{padding:12px;font-size:16px}
+  .menu a[aria-current="page"]{box-shadow:inset 3px 0 0 var(--accent);border-radius:0 8px 8px 0}
 }
 
 /* hero */
@@ -227,14 +229,12 @@ footer a{color:inherit;display:inline-flex;align-items:center;min-height:44px}
 <body>
 
 <header class="top">
-  <div class="wrap">
+  <div class="bar">
     <a class="mark" href="index.html">Kamal Hasan<span>.</span></a>
     <nav aria-label="Main">
       <ul class="menu" id="menu">
         <li><a href="index.html">Overview</a></li>
-        <li><a href="#work">Projects</a></li>
-        <li><a href="#dana">DANA</a></li>
-        <li><a href="#experience">Experience</a></li>
+        <li><a aria-current="page" href="work.html">Full details</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
