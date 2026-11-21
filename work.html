@@ -200,13 +200,13 @@ details.more[open] summary::before{content:"−"}
 .cert span{font:400 13px var(--mono);color:var(--muted)}
 
 /* contact + footer: identical on both pages (the "full details" version) */
-.cf{background:var(--ink);color:var(--bg);padding-block:80px 64px;border-top:0;font-size:16px;line-height:1.6}
+.cf{background:var(--ink);color:var(--bg);padding-block:56px 40px;border-top:0;font-size:16px;line-height:1.6}
 .cf-wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.cf-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 48px;align-items:end;margin-bottom:40px}
+.cf-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 48px;align-items:end;margin-bottom:24px}
 .cf-kicker{font:500 13px var(--mono);margin:0 0 8px;color:color-mix(in srgb,var(--bg) 78%,var(--ink))}
-.cf h2{font:800 clamp(36px,6vw,68px)/1.02 var(--display);letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--bg)}
-.cf-head p{margin:0;font-size:16.5px;max-width:52ch;color:color-mix(in srgb,var(--bg) 78%,var(--ink))}
-.cf-mail{display:inline-block;font:700 clamp(22px,4.2vw,44px)/1.15 var(--display);color:var(--bg);overflow-wrap:anywhere;margin-bottom:28px;text-decoration-thickness:2px}
+.cf h2{font:800 clamp(28px,3.2vw,38px)/1.1 var(--display);letter-spacing:-.03em;margin:0;text-wrap:balance;color:var(--bg)}
+.cf-head > p{margin:0;font-size:16px;max-width:52ch;justify-self:end;color:color-mix(in srgb,var(--bg) 78%,var(--ink))}
+.cf-mail{display:inline-flex;align-items:center;min-height:44px;font:700 clamp(18px,2vw,22px)/1.2 var(--display);color:var(--bg);overflow-wrap:anywhere;margin-bottom:16px;text-decoration-thickness:1px}
 .cf-mail:hover{color:color-mix(in srgb,var(--accent) 60%,var(--bg))}
 .cf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
 @media (min-width:1000px){.cf-grid{grid-template-columns:1.45fr 1fr 1fr 1fr}} /* email card gets the room it needs so the address never breaks mid-word */
@@ -218,8 +218,9 @@ details.more[open] summary::before{content:"−"}
 .cf-copy:active{transform:translateY(1px)}
 .cf :focus-visible{outline-color:var(--bg)}
 .cf-footer{background:var(--ink);color:color-mix(in srgb,var(--bg) 72%,var(--ink));font:400 13px var(--mono)}
-.cf-line{border-top:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink));padding-block:24px 40px}
-@media (max-width:760px){.cf-head{grid-template-columns:1fr}.cf{padding-block:60px 48px}}
+.cf-line{border-top:1px solid color-mix(in srgb,var(--bg) 18%,var(--ink));padding-block:18px 28px}
+@media (max-width:900px){.cf-head{grid-template-columns:1fr}.cf-head > p{justify-self:start}}
+@media (max-width:760px){.cf{padding-block:48px 36px}}
 /* floating back-to-top: appears after the first screen, so it never competes with the hero */
 .to-top{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:30;width:48px;height:48px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 10px 24px -12px color-mix(in srgb,var(--ink) 45%,transparent);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(8px)}
 .to-top.is-visible{opacity:1;visibility:visible;transform:none}
@@ -597,9 +598,8 @@ details.more[open] summary::before{content:"−"}
     <div><p class="cf-kicker">Contact</p><h2>Need someone to own quality?</h2></div>
     <p>Open to QA lead, QA manager and senior SDET roles, remote or in Jakarta. Email is the fastest way to reach me.</p>
   </div>
-  <a class="cf-mail" href="mailto:kmlhasan1989@gmail.com">kmlhasan1989@gmail.com</a>
   <div class="cf-grid">
-    <div class="cf-card"><div><small>Email</small><span class="v" id="cf-email">kmlhasan1989@gmail.com</span></div><button class="cf-copy" type="button" data-t="cf-email">Copy</button></div>
+    <div class="cf-card"><div><small>Email</small><a class="v" id="cf-email" href="mailto:kmlhasan1989@gmail.com">kmlhasan1989@gmail.com</a></div><button class="cf-copy" type="button" data-t="cf-email">Copy</button></div>
     <div class="cf-card"><div><small>Phone</small><span class="v" id="cf-phone">+62 811 1112 207</span></div><button class="cf-copy" type="button" data-t="cf-phone">Copy</button></div>
     <div class="cf-card"><div><small>LinkedIn</small><a class="v" href="https://www.linkedin.com/in/kamal-hasan-96312850" target="_blank" rel="noopener">kamal-hasan-96312850</a></div></div>
     <div class="cf-card"><div><small>GitHub</small><a class="v" href="https://github.com/kmlhasan-qa" target="_blank" rel="noopener">kmlhasan-qa</a></div></div>
